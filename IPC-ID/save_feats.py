@@ -25,7 +25,7 @@ def load_weight(ckpt_path):
     encoder.maxpool = torch.nn.Identity()
     encoder.fc = torch.nn.Identity()
     print(f"load pretrained model from {ckpt_path}")
-    state = torch.load(ckpt_path,map_location='cpu')["state_dict"]
+    state = torch.load(ckpt_path)["state_dict"]
     for k in list(state.keys()):
         if "encoder" in k:
             state[k.replace("encoder", "backbone")] = state[k]

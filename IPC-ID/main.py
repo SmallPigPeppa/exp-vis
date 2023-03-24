@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # sort samplers by label
 byol_feats = np.load('Pre-Feats/byol_features.npy')
-simclr_feats= np.load('Pre-Feats/byol_features.npy')
+simclr_feats= np.load('Pre-Feats/simclr_features.npy')
 
 
 
