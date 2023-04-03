@@ -70,6 +70,6 @@ axs[1].grid(True)
 # plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.2), ncol=5)
 legend=plt.figlegend(handles=[l,l0,l1,l2,l3,l4,l5,l6,l7,l8],loc='upper center', bbox_to_anchor=(0.5, 1.1), ncol=10,columnspacing=1.0,fontsize=11)
 plt.tight_layout()
-fig.savefig('cifar100.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cifar100-10sample.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 
 plt.show()
