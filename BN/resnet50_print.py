@@ -50,7 +50,7 @@ def get_loader(hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC201
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
     ])
 
-    dataset = torchvision.datasets.ImageFolder(os.path.join(dataset_path, "val"), transform=transform)
+    dataset = torchvision.datasets.ImageFolder(os.path.join(dataset_path, "train"), transform=transform)
     loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=8, pin_memory=True)
     return loader
 
