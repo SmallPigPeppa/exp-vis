@@ -2,27 +2,48 @@ import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
+import numpy as np
 
-# 加载预训练的ResNet-50模型
-model = models.resnet50(pretrained=True)
+if __name__ == '__main__':
+    mean_values = np.array([0.00121648, -0.1486167, 0.03410815, 0.00154123, -0.10826569,
+                            0.0225739, -0.03975659, 0.00094656, -0.00114648, -0.03355038,
+                            -0.00874648, -0.07328865, -0.04987563, -0.00066305, -0.02232039,
+                            -0.0012459, 0.01796051, -0.01137707, -0.03474317, -0.01314376,
+                            -0.00098718, -0.05576704, -0.04429319, -0.00395706, -0.0841095,
+                            -0.04115568, -0.01216946, 0.0020088, -0.04623547, -0.03166521,
+                            -0.01240213, -0.05040688, -0.05743694, -0.00976476, -0.0598396,
+                            -0.05033048, -0.01299621, -0.0670504, -0.06056911, -0.01665885,
+                            -0.05622633, -0.05753474, -0.02474646, -0.07077304, -0.05933768,
+                            -0.01109559, -0.00301553, -0.28401694, -0.09000859, -0.00157768,
+                            -0.34196797, -0.0868853, -0.00564744])[1::3]
+    var_values = np.array([2.6527023e+00, 5.4060567e-02, 3.1812280e-02, 6.3323546e-03, 3.8960725e-02,
+                           2.4252107e-02, 1.2729576e-02, 1.3933826e-03, 1.8808566e-02, 1.8148892e-02,
+                           1.0298998e-03, 2.4810685e-02, 3.0001018e-02, 2.3645449e-03, 1.2600677e-02,
+                           4.5456484e-02, 2.1591371e-02, 1.6200125e-03, 2.8473567e-02, 2.1454986e-02,
+                           1.4215745e-03, 2.4066448e-02, 1.5357634e-02, 9.9170685e-04, 2.9999075e-02,
+                           3.1682372e-02, 3.3408867e-03, 8.5237045e-03, 2.1719489e-02, 2.2320516e-02,
+                           1.4247188e-03, 1.8276341e-02, 1.5368643e-02, 9.7041950e-04, 1.6341068e-02,
+                           1.0054742e-02, 7.4541435e-04, 1.5063213e-02, 9.0366611e-03, 6.9432519e-04,
+                           1.4252217e-02, 1.1854451e-02, 1.2736355e-03, 1.3850168e-02, 1.3513955e-02,
+                           1.3862501e-03, 1.6742169e-03, 1.4818665e-01, 1.2698019e-02, 8.1761833e-04,
+                           2.7458161e-01, 1.0883985e-02, 9.5933105e-04])[1::3]
+    x = list(range(len(mean_values)))
+    plt.plot(x, mean_values, '-o', label='Baseline', color='purple', linewidth=1)
+    plt.fill_between(x, np.array(mean_values) - np.array(var_values), np.array(mean_values) + np.array(var_values),
+                     color='purple', alpha=0.2, edgecolor=None)
 
-# 从ResNet-50模型中提取所有BN层的均值和方差
-bn_means = []
-bn_vars = []
+    # plt.bar(x, mean_values, yerr=var_values, capsize=5, alpha=0.5)
 
-for name, module in model.named_modules():
-    if isinstance(module, torch.nn.BatchNorm2d):
-        bn_means.append(module.running_mean.detach().numpy())
-        bn_vars.append(module.running_var.detach().numpy())
+    # 添加轴标签和标题
+    plt.xlabel('BN Index')
+    plt.ylabel('Mean and Variance')
+    plt.title('ResNet50', loc='left')
 
-# 计算每个BN层的均值和方差
-mean_values = [mean.mean() for mean in bn_means]
-var_values = [var.mean() for var in bn_vars]
+    # 显示图例
+    plt.legend()
+    plt.grid()
 
-# 绘制均值和方差的误差条形图
-x = list(range(len(mean_values)))
-plt.bar(x, mean_values, yerr=var_values, capsize=5, alpha=0.5)
-plt.xlabel("Batch Normalization Layers")
-plt.ylabel("Mean and Variance")
-plt.title("Mean and Variance of BN Layers in ResNet-50")
-plt.show()
+    # 显示图形
+
+    plt.savefig('resnet50.pdf', format='pdf', bbox_inches='tight')
+    plt.show()
