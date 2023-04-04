@@ -40,7 +40,7 @@ def reset_running_stats(module):
         module.running_var.fill_(1)
 
 
-def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC2012/val', batch_size=128):
+def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC2012', batch_size=128):
     interpolation = InterpolationMode.BILINEAR
     transform = transforms.Compose([
         transforms.RandomResizedCrop(224, interpolation=interpolation),
@@ -50,7 +50,7 @@ def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset
         transforms.Resize(224, interpolation=interpolation),
     ])
 
-    dataset = torchvision.datasets.ImageFolder(os.path.join(dataset_path, "train"), transform=transform)
+    dataset = torchvision.datasets.ImageFolder(os.path.join(dataset_path, "val"), transform=transform)
     loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, num_workers=8, pin_memory=True)
     return loader
 
