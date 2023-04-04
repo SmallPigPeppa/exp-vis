@@ -2,6 +2,7 @@ import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
+import torch.nn.functional as F
 import numpy as np
 from tqdm import tqdm
 
@@ -40,15 +41,13 @@ def reset_running_stats(module):
         module.running_var.fill_(1)
 
 
-def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC2012', batch_size=128):
+def get_loader(hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC2012', batch_size=128):
     interpolation = InterpolationMode.BILINEAR
     transform = transforms.Compose([
         transforms.RandomResizedCrop(224, interpolation=interpolation),
         transforms.RandomHorizontalFlip(hflip_prob),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        transforms.Resize(imagesize, interpolation=interpolation),
-        transforms.Resize(224, interpolation=interpolation),
     ])
 
     dataset = torchvision.datasets.ImageFolder(os.path.join(dataset_path, "val"), transform=transform)
@@ -58,7 +57,7 @@ def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset
 
 if __name__ == '__main__':
     # 32 resolution forward
-
+    imagesize=32
     model = models.resnet50(pretrained=True)
 
     # Load pretrained ResNet50 model
@@ -74,9 +73,11 @@ if __name__ == '__main__':
 
     # Forward pass with your dataloader
     with torch.no_grad():
-        for inputs, labels in tqdm(loader):
-            inputs, labels = inputs.cuda(), labels.cuda()
-            outputs = model(inputs)
+        for x, y in tqdm(loader):
+            x, y = x.cuda(), y.cuda()
+            x = F.interpolate(x, size=imagesize, mode='bilinear')
+            x = F.interpolate(x, size=224, mode='bilinear')
+            outputs = model(x)
 
     print_info(model)
     save_path = "resnet50_32.pth"
