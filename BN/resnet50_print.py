@@ -22,8 +22,8 @@ def print_info(model):
 
     for name, module in model.named_modules():
         if isinstance(module, torch.nn.BatchNorm2d):
-            bn_means.append(module.running_mean.detach().numpy())
-            bn_vars.append(module.running_var.detach().numpy())
+            bn_means.append(module.running_mean.cpu().detach().numpy())
+            bn_vars.append(module.running_var.cpu().detach().numpy())
 
     # Print
     mean_str = np.array2string(np.array([mean.mean() for mean in bn_means]), separator=', ')
@@ -56,20 +56,29 @@ def get_loader(hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset/lzy/ILSVRC201
 
 
 if __name__ == '__main__':
+    num_gpus = torch.cuda.device_count()
+    assert num_gpus > 0, "No GPU found. Please make sure you have GPUs installed."
     # 32 resolution forward
-    imagesize=32
-    model = models.resnet50(pretrained=True)
+    imagesize = 32
+    batch_size_per_gpu = 128
 
     # Load pretrained ResNet50 model
     model = resnet50(pretrained=True)
+
+    # if multi gpu
+    if num_gpus > 1:
+        model = nn.DataParallel(model)
+
     model = model.cuda()
 
     # Set the model to training mode
     model.train()
-
     # Reset running mean and running variance
     model.apply(reset_running_stats)
-    loader = get_loader()
+
+
+    total_batch_size = batch_size_per_gpu * num_gpus
+    loader = get_loader(batch_size=total_batch_size)
 
     # Forward pass with your dataloader
     with torch.no_grad():
