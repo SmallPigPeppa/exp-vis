@@ -46,6 +46,7 @@ def get_loader(imagesize=32, hflip_prob=0.5, dataset_path='/mnt/mmtech01/dataset
         transforms.RandomResizedCrop(224, interpolation=interpolation),
         transforms.RandomHorizontalFlip(hflip_prob),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        transforms.ToTensor(),
         transforms.Resize(imagesize, interpolation=interpolation),
         transforms.Resize(224, interpolation=interpolation),
     ])
