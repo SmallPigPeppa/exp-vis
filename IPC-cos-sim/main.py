@@ -1,52 +1,114 @@
 import numpy as np
 import torch
+import torch.nn.functional as F
 import matplotlib.pyplot as plt
+from sklearn.metrics.pairwise import cosine_similarity
 
-# sort samplers by label
-sx = np.load('./s_test0.npy')
-sslx = np.load('./ssl_test0.npy')
-y = np.load('./y_test0.npy')
-order = y.argsort()
-sx = sx[order]
-sslx = sslx[order]
-print(y)
-print(order)
-print(y[order])
+def cos_sim(feats_path):
+    feats=np.load(feats_path)
+    return cosine_similarity(feats)
 
-# # normalization for every classes
-# sx=torch.from_numpy(sx)
-# sslx=torch.from_numpy(sslx)
+if __name__=='__main__':
 
-#
-s_sv= []
-ssl_sv = []
-fig, ax = plt.subplots()
-components=20
-for i in range(10):
-    sx_i = sx[100 * i:100 * (i + 1)]
-    sslx_i = sslx[100 * i:100 * (i + 1)]
-    sx_i = torch.from_numpy(sx_i)
-    sslx_i = torch.from_numpy(sslx_i)
-    sx_meani = torch.mean(sx_i, dim=0)
-    sslx_meani = torch.mean(sslx_i, dim=0)
-    sx_i = sx_i - sx_meani
-    sslx_i = sslx_i - sslx_meani
+    # # byol_feats=''
+    # # byol_cos=cos_sim(byol_feats)
+    # similarity_matrices = [np.random.rand(10, 10) for i in range(5)]
+    #
+    # # 设置图像大小
+    # fig, axs = plt.subplots(nrows=1, ncols=5, figsize=(25, 5))
+    #
+    # # 循环绘制五个图
+    # for i, similarity_matrix in enumerate(similarity_matrices):
+    #     axs[i].imshow(similarity_matrix)
+    #     axs[i].set_xlabel("Sample Index")
+    #     axs[i].set_ylabel("Sample Index")
+    #
+    # # 在最后一个图的右边添加颜色条
+    # cbar = fig.colorbar(axs[-1].imshow(similarity_matrices[-1]), ax=axs, orientation="vertical")
+    # cbar.set_label("Cosine Similarity")
+    #
+    #
+    #
+    #
+    # # plt.tight_layout()
+    # plt.show()
 
-    u, s, v = torch.svd(sx_i)
-    u2, s2, v2 = torch.svd(sslx_i)
-    s = s / torch.max(s)
-    s2 = s2 / torch.max(s2)
-    if i ==0:
-        ax.plot(np.square(s.numpy()[:components]), marker='o', color='g', label='Supervised', linewidth=0.3, markersize=2.0)
-        ax.plot(np.square(s2.numpy()[:components]), marker='o', color='r', label='Self-Supervised', linewidth=0.3,markersize=2.0)
-    else:
-        ax.plot(np.square(s.numpy()[:components]), marker='o', color='g', linewidth=0.3,
-                markersize=2.0)
-        ax.plot(np.square(s2.numpy()[:components]), marker='o', color='r', linewidth=0.3,
-                markersize=2.0)
-ax.set_xticks(list(range(components)))
-plt.grid()
-ax.legend(loc='upper right')
-plt.xlabel("Components")
-plt.ylabel("Sigular Values")
-plt.savefig(f'splot_inner_{components}.pdf')
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    # 假设有五个余弦相似度矩阵
+    matrices = [np.random.rand(10, 10) for i in range(5)]
+
+    # 绘制五个子图
+    fig, axs = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
+    for ax, matrix in zip(axs, matrices):
+        im = ax.imshow(matrix, cmap='coolwarm')
+
+    # 添加一个颜色条
+    fig.subplots_adjust(right=0.8)
+    cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+    fig.colorbar(im, cax=cbar_ax)
+
+    # plt.tight_layout()
+    plt.show()
+
+    # # sort samplers by label
+    # sx = np.load('./s_test_x.npy')
+    # sx2=np.load('./s_test0.npy')
+    # sy=np.load('./s_test_y.npy')
+    # sslx = np.load('./ssl_test_test.npy')
+    # ssly = np.load('./y_test0.npy')
+    # sslorder = ssly.argsort()
+    # sorder = sy.argsort()
+    # sslx = sslx[sslorder]
+    # sx = sx[sorder]
+    # sx2=sx2[sorder]
+    # print(ssly)
+    # print(sorder)
+    # print(ssly[sslorder])
+    # num_samplers = 10000
+    # a1=np.ones(shape=(10000,10000))
+    # a0=np.zeros(shape=(1000,1000))
+    # for i in range(10):
+    #     a1[i*1000:(i+1)*1000,i*1000:(i+1)*1000]=a0
+    #
+    #
+    # print(ssly.shape)
+    # print(sslx.shape)
+    # print(sx.shape)
+    # s_cos=cosine_similarity(X=sx, dense_output=True)
+    # s2_cos=cosine_similarity(X=sx2, dense_output=True)
+    # ssl_cos=cosine_similarity(X=sslx, dense_output=True)
+    # # ssl_cos=ssl_cos-a1*0.02
+    # # s_cos=s_cos+0.003*a1
+    # print(s_cos.shape)
+    # print(ssl_cos)
+    # np.save('./s_cos', s_cos)
+    # np.save('./ssl_cos', ssl_cos)
+    #
+    # fig, ax = plt.subplots()
+    # plt.imshow(ssl_cos,cmap=plt.cm.Blues)
+    # cbar=plt.colorbar()
+    # ax.tick_params(axis='both', which='major', labelsize=13)
+    # plt.clim(0, 1)
+    # for t in cbar.ax.get_yticklabels():
+    #      t.set_fontsize(13)
+    # fig.savefig('ssl_cos.png', format='png', dpi=300)
+    # plt.show()
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    # 假设有5个余弦相似度矩阵，每个矩阵的大小为10x10
+    cos_sim_matrices = [np.random.rand(10, 10) for i in range(5)]
+
+    fig, axs = plt.subplots(nrows=1, ncols=5, figsize=(15, 8))
+
+    for ax, cos_sim_matrix in zip(axs.flat, cos_sim_matrices):
+        im = ax.imshow(cos_sim_matrix)
+
+    fig.subplots_adjust(right=0.8)
+    cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+    fig.colorbar(im, cax=cbar_ax)
+
+    plt.show()
+
