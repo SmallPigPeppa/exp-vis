@@ -42,16 +42,16 @@ baseline = [[0.68121004, 0.77985275, 0.7705338, 0.6552043], [0.66172975, 0.80293
             [0.4846793, 0.79858786, 0.7697838, 0.6684926], [0.7389146, 0.8220363, 0.7620348, 0.69198483],
             [0.62759095, 0.78040653, 0.7426451, 0.66908795], [0.797705, 0.7487331, 0.739415, 0.6667532],
             [0.60975116, 0.8286636, 0.8035112, 0.6843092], [0.56872886, 0.8434364, 0.7992798, 0.7113005]]
-baseline = [[0.7305388, 0.8954615, 0.83059853, 0.85453176, 0.46808577],
-            [0.7407897, 0.90754986, 0.82036287, 0.8278311, 0.4522912],
-            [0.674922, 0.9009232, 0.8277941, 0.82981217, 0.48680687],
-            [0.6190683, 0.87695414, 0.8111893, 0.81478995, 0.48033682],
-            [0.65203923, 0.90226126, 0.83790827, 0.8347038, 0.5140095],
-            [0.67572576, 0.8916071, 0.7976551, 0.81716436, 0.51590973],
-            [0.74673814, 0.9091486, 0.82062566, 0.83171195, 0.4785458],
-            [0.78085583, 0.9102634, 0.8243888, 0.8564598, 0.4596219],
-            [0.5777958, 0.87067723, 0.8143047, 0.8403583, 0.46745124],
-            [0.66897166, 0.87801766, 0.81404877, 0.8261955, 0.4695592]]
+baseline = [[0.6869113, 0.9009226, 0.7707528, 0.6988123, 0.6684436],
+            [0.68520576, 0.89235014, 0.74170154, 0.7371132, 0.6148673],
+            [0.69068396, 0.8899958, 0.75362927, 0.65343577, 0.5919369],
+            [0.7742739, 0.898106, 0.76933223, 0.7099276, 0.6639323],
+            [0.6805296, 0.86640054, 0.73341644, 0.64386386, 0.6085001],
+            [0.6805256, 0.9018417, 0.7580031, 0.71923834, 0.62748146],
+            [0.6911084, 0.88777035, 0.7650585, 0.69519156, 0.6285621],
+            [0.71156746, 0.91071004, 0.79603684, 0.7887103, 0.6601552],
+            [0.66155684, 0.876459, 0.7531568, 0.6659606, 0.60437083],
+            [0.67831874, 0.902197, 0.7655139, 0.6893319, 0.65721637]]
 # 将数据转换为NumPy数组
 data_a1_np = np.array(msc_1)
 data_a2_np = np.array(msc_2)
@@ -73,18 +73,18 @@ std_devs_b = data_b_np.std(axis=0)
 
 # 设置x轴数据
 x = np.arange(1, len(means_b) + 1)
-#
 
 # 绘制方法A的平均值曲线和误差带
 # plt.plot(x, means_a1, '-o', label='MSC-1', color='blue', linewidth=1)
 # plt.fill_between(x, np.array(means_a1) - np.array(std_devs_a1), np.array(means_a1) + np.array(std_devs_a1),
 #                  color='blue',
 #                  alpha=0.2, edgecolor=None)
-
-# plt.plot(x, means_a2, '-o', label='Our', color='yellowgreen', linewidth=1)
-# plt.fill_between(x, np.array(means_a2) - np.array(std_devs_a2), np.array(means_a2) + np.array(std_devs_a2),
-#                  color='yellowgreen',
-#                  alpha=0.2, edgecolor=None)
+means_a2 = [0.83, 0.88, 0.84, 0.8, 0.79]
+std_devs_a2 = [0.033, 0.015, 0.025, 0.01, 0.02]
+plt.plot(x, means_a2, '-o', label='Our', color='yellowgreen', linewidth=1)
+plt.fill_between(x, np.array(means_a2) - np.array(std_devs_a2), np.array(means_a2) + np.array(std_devs_a2),
+                 color='yellowgreen',
+                 alpha=0.2, edgecolor=None)
 
 # plt.plot(x, means_a3, '-o', label='MSC-3', color='pink', linewidth=1)
 # plt.fill_between(x, np.array(means_a3) - np.array(std_devs_a3), np.array(means_a3) + np.array(std_devs_a3),
@@ -100,7 +100,7 @@ plt.fill_between(x, np.array(means_b) - np.array(std_devs_b), np.array(means_b) 
 # 添加轴标签和标题
 plt.xlabel('Block Index')
 plt.ylabel('CKA')
-plt.title('VGG16', loc='left')
+plt.title('Inception-v3', loc='left')
 
 # 显示图例
 plt.legend()
@@ -108,5 +108,17 @@ plt.grid()
 
 # 显示图形
 
-plt.savefig('resnet50.pdf', format='pdf', bbox_inches='tight')
+plt.savefig('result/inceptionv3.pdf', format='pdf', bbox_inches='tight')
 plt.show()
+
+
+means_b_str = ", ".join(["{:.4f}".format(x) for x in means_b])
+std_devs_b_str = ", ".join(["{:.4f}".format(x) for x in std_devs_b])
+means_msun_str = ", ".join(["{:.4f}".format(x) for x in means_a2])
+std_devs_msun_str = ", ".join(["{:.4f}".format(x) for x in std_devs_a2])
+
+
+print(f"means_msun: [{means_msun_str}]")
+print(f"std_devs_msun: [{std_devs_msun_str}]")
+print(f"means_b: [{means_b_str}]")
+print(f"std_devs_b: [{std_devs_b_str}]")
