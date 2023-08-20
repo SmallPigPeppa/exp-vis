@@ -24,7 +24,8 @@ if __name__ == "__main__":
 
     method_names = ['BYOL', 'SimCLR', 'MoCoV2', 'Barlow', 'Supervised', 'Random']
     class_idx = [39, 68]
-    class_idx = [9, 44, 93]
+    class_idx = [9, 12, 77,93]
+    class_idx = [9, 12, 47,93]
     num = 100
 
     pca = PCA(n_components=2)
