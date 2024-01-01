@@ -4,7 +4,7 @@ import os
 import re
 if __name__ == '__main__':
     # 加载配置文件
-    config_file = 'byol-5tasks-new.json'
+    config_file = 'ab-lambda-new.json'
     # config_file = 'byol-10tasks-new.json'
     with open(os.path.join('experiments', config_file), 'r') as file:
         config = json.load(file)
@@ -15,82 +15,70 @@ if __name__ == '__main__':
     fontsize2 = config["plot_settings"]["fontsize2"]
     spacing = config["plot_settings"]["spacing"]
     figuresize = config["plot_settings"]["figuresize"]
-    num_tasks = config["plot_settings"]["num_tasks"]
-    methods = config["plot_settings"]["methods"]
+    lambdas = config["plot_settings"]["lambdas"]
+    datasets = config["plot_settings"]["datasets"]
     # dataset_name = config["plot_settings"]["dataset_name"]
 
 
     # 函数用于绘制每个数据集的图表
-    def plot_dataset(ax, dataset_i, num_categories):
-        for method, settings in methods.items():
-            data = config["datasets"][dataset_i][method]
-            ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
+    def plot_dataset(ax, t, metric,linestyle):
+        for dataset_i, settings in datasets.items():
+            data = config["datasets"][dataset_i][t][metric]
+            ax.plot(lambdas, data, label=dataset_i, color=settings["color"], linestyle=linestyle, marker='o', markerfacecolor='none', markeredgecolor=settings["color"],markersize=7,markeredgewidth=2)
 
-        ax.set_xlabel('number of Classes', fontsize=fontsize0)
-        ax.set_ylabel('accuracy(%)', fontsize=fontsize0)
-        # ax.set_title(f'{num_tasks} - {dataset_name}', fontsize=fontsize0)
 
-        # n = re.match(r'\d+', dataset_i)
-        ax.set_title(f'{dataset_i}', fontsize=fontsize0, loc="left")
-        # ax.set_title(f'T={num_tasks}', fontsize=fontsize0, loc="right")
-        ax.set_title(f'{num_tasks} Tasks', fontsize=fontsize0, loc="right")
-        ax.grid(True)
+        ax.set_xlabel('Lambda', fontsize=fontsize0)
+        ax.set_ylabel(f'{metric.lower()} acc(%)', fontsize=fontsize0)
+
+        # ax.grid(True)
+        # ax.grid(True, which='both', axis='both', linestyle='-', linewidth=0.5)
+        # for i in range(len(lambdas)):
+        #     if i % 2 == 0:  # 每隔一个刻度绘制网格线
+        #         ax.axvline(lambdas[i], color='gray', linestyle='--', linewidth=0.5)
+        #
+        ax.grid(True, which='major', axis='y',linestyle='--')  # 只在y轴上添加标准网格线
+
         ax.tick_params(labelsize=fontsize1)
+        ax.set_xticks(lambdas)
+        ax.tick_params(axis='x', rotation=90)
 
-        # 为所有图表设置相同的主要刻度
-        # if dataset_i=="miniImageNet":
-        #     ax.set_xticks([20, 40, 60, 80, 100])
-        # else:
-        #     ax.set_xticks([20, 40, 60, 80, 100])
-
-        # 如果是10步的图表，添加次要刻度
-        if num_tasks == 10:
-            if dataset_i=="miniImageNet":
-                minor_ticks = [10, 30, 50, 70, 90]
-            else:
-
-                minor_ticks = [10, 30, 50, 70, 90]  # 这些是10步中的额外刻度
-            ax.set_xticks(minor_ticks, minor=True)
 
 
     # 创建图表
-    fig, axs = plt.subplots(nrows=1, ncols=3, figsize=figuresize)
+    fig, axs = plt.subplots(nrows=1, ncols=2, figsize=figuresize)
     # subplots_spacing = 15  # 可以根据需要调整这个值
     fig.subplots_adjust(wspace=spacing)
 
     # 绘制5task和10task的图表
-    if num_tasks==5:
-        plot_dataset(axs[0], "CIFAR-100", [20, 40, 60, 80, 100])
-        plot_dataset(axs[1], "ImageNet-100", [20, 40, 60, 80, 100])
-        plot_dataset(axs[2], "miniImageNet", [20, 40, 60, 80, 100])
-        axs[0].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-        axs[1].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-        axs[2].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
+    plot_dataset(axs[0], "T=5", "Avg",'-')
+    plot_dataset(axs[1], "T=5", "Last",'-')
+    plot_dataset(axs[0], "T=10", "Avg",'--')
+    plot_dataset(axs[1], "T=10", "Last",'--')
 
-    elif num_tasks==10:
-        plot_dataset(axs[0], "CIFAR-100", [10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-        plot_dataset(axs[1], "ImageNet-100", [10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-        plot_dataset(axs[2], "miniImageNet", [10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-        axs[0].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-        axs[1].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-        axs[2].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
 
+    # legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=fontsize2)
+    # legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.2), ncol=len(datasets) + 1, fontsize=fontsize2)
     handles, labels = axs[0].get_legend_handles_labels()
-    # legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.3),
-    #                     ncol=int((len(methods) + 2) / 2),
-    #                     # ncol=(len(methods) + 1),
-    #                     fontsize=fontsize0)
-    legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=fontsize2)
 
+    # 筛选出与实线相关的句柄和标签
+    solid_line_handles = [h for h, l in zip(handles, labels) if h.get_linestyle() == '-']
+    solid_line_labels = [l for h, l in zip(handles, labels) if h.get_linestyle() == '-']
 
-    legend.get_frame().set_facecolor('gray')
-    legend.get_frame().set_alpha(0.1)
+    # 第一部分图例 - 只包括实线的数据集名称
+    legend1 = fig.legend(solid_line_handles, solid_line_labels, loc='upper center', bbox_to_anchor=(0.5, 1.12),
+                         ncol=len(solid_line_handles), fontsize=fontsize2)
+    import matplotlib.lines as mlines
+    # 第二部分图例 - 任务T=5和T=10
+    line1 = mlines.Line2D([], [], color='black', linestyle='-', label='T=10')
+    line2 = mlines.Line2D([], [], color='black', linestyle='--', label='T=5')
+    legend2 = axs[0].legend(handles=[line1, line2], fontsize=fontsize2)
+    legend3 = axs[1].legend(handles=[line1, line2],  fontsize=fontsize2)
 
-    # legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.2),
-    #                     ncol=len(methods) + 1,
-    #                     fontsize=fontsize1)
+    # legend.get_frame().set_facecolor('gray')
+    # legend.get_frame().set_alpha(0.1)
+
+    axs[0].set_yticks([64,67.0,70,73.0,76])
 
     plt.tight_layout()
-    fig.savefig(f'{config_file.split(".")[0]}-alldataset.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
-    # fig.savefig(f'{config_file.split(".")[0]}-alldataset.pdf',)
+    fig.savefig(f'{config_file.split(".")[0]}-alldataset.pdf', bbox_extra_artists=(legend1,), bbox_inches='tight')
     plt.show()
