@@ -32,12 +32,12 @@
     }
   },
   "plot_settings": {
-      "lambdas": [0.00,0.01,0.05,0.10,0.20,0.50,0.80,1.00,1.50,2.00],
+      "lambdas": ["0","0.01","0.05","0.1","0.2","0.5","0.8","1.0","1.5","2.0"],
       "fontsize0": 18,
       "fontsize1": 14,
       "fontsize2": 14,
       "spacing": 15,
-      "figuresize": [10, 4],
+      "figuresize": [9, 4],
       "datasets": {
           "CIFAR-100": {"color": "#1f77b4", "linestyle": "-"},
           "ImageNet-100": {"color": "#ff7f0e", "linestyle": "-"},

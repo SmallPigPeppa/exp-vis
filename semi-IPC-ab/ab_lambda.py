@@ -4,7 +4,7 @@ import os
 import re
 if __name__ == '__main__':
     # 加载配置文件
-    config_file = 'ab-lambda-new.json'
+    config_file = 'ab-lambda-new2.json'
     # config_file = 'byol-10tasks-new.json'
     with open(os.path.join('experiments', config_file), 'r') as file:
         config = json.load(file)
@@ -37,28 +37,29 @@ if __name__ == '__main__':
         #         ax.axvline(lambdas[i], color='gray', linestyle='--', linewidth=0.5)
         #
         ax.grid(True, which='major', axis='y',linestyle='--')  # 只在y轴上添加标准网格线
+        # ax.grid(True, which='major', axis='y', linestyle='--')  # 只在y轴上添加标准网格线
 
         ax.tick_params(labelsize=fontsize1)
         ax.set_xticks(lambdas)
-        ax.tick_params(axis='x', rotation=90)
+        # ax.tick_params(axis='x', rotation=90)
 
 
 
     # 创建图表
-    fig, axs = plt.subplots(nrows=1, ncols=2, figsize=figuresize)
+    fig, axs = plt.subplots(nrows=1, ncols=1, figsize=figuresize)
     # subplots_spacing = 15  # 可以根据需要调整这个值
     fig.subplots_adjust(wspace=spacing)
 
     # 绘制5task和10task的图表
-    plot_dataset(axs[0], "T=5", "Avg",'-')
-    plot_dataset(axs[1], "T=5", "Last",'-')
-    plot_dataset(axs[0], "T=10", "Avg",'--')
-    plot_dataset(axs[1], "T=10", "Last",'--')
+    plot_dataset(axs, "T=5", "Avg",'-')
+    # plot_dataset(axs[1], "T=5", "Last",'-')
+    plot_dataset(axs, "T=10", "Avg",'--')
+    # plot_dataset(axs[1], "T=10", "Last",'--')
 
 
     # legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=fontsize2)
     # legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.2), ncol=len(datasets) + 1, fontsize=fontsize2)
-    handles, labels = axs[0].get_legend_handles_labels()
+    handles, labels = axs.get_legend_handles_labels()
 
     # 筛选出与实线相关的句柄和标签
     solid_line_handles = [h for h, l in zip(handles, labels) if h.get_linestyle() == '-']
@@ -71,13 +72,13 @@ if __name__ == '__main__':
     # 第二部分图例 - 任务T=5和T=10
     line1 = mlines.Line2D([], [], color='black', linestyle='-', label='T=10')
     line2 = mlines.Line2D([], [], color='black', linestyle='--', label='T=5')
-    legend2 = axs[0].legend(handles=[line1, line2], fontsize=fontsize2)
-    legend3 = axs[1].legend(handles=[line1, line2],  fontsize=fontsize2)
+    legend2 = axs.legend(handles=[line1, line2], fontsize=fontsize2)
+    # legend3 = axs[1].legend(handles=[line1, line2],  fontsize=fontsize2)
 
     legend1.get_frame().set_facecolor('gray')
     legend1.get_frame().set_alpha(0.1)
 
-    axs[0].set_yticks([64,67.0,70,73.0,76])
+    axs.set_yticks([64,67.0,70,73.0,76])
 
     plt.tight_layout()
     fig.savefig(f'{config_file.split(".")[0]}-alldataset.pdf', bbox_extra_artists=(legend1,), bbox_inches='tight')
