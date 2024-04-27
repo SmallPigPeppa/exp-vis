@@ -57,9 +57,9 @@ if __name__ == '__main__':
     plot_dataset(axs[0], "CUB-200", [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200])
     plot_dataset(axs[1], "CIFAR-100", [60, 65, 70, 75, 80, 85, 90, 95, 100])
     plot_dataset(axs[2], "miniImageNet", [60, 65, 70, 75, 80, 85, 90, 95, 100])
-    axs[0].plot([200], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-    axs[1].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-    axs[2].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
+    axs[0].plot([200], [76.5], label='JointCNN', marker='d', markersize=10, color='red')
+    axs[1].plot([100], [83.5], label='JointCNN', marker='d', markersize=10, color='red')
+    axs[2].plot([100], [79.0], label='JointCNN', marker='d', markersize=10, color='red')
 
     handles, labels = axs[0].get_legend_handles_labels()
     # legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.3),

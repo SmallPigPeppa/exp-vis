@@ -70,8 +70,9 @@ if __name__ == '__main__':
                          ncol=len(solid_line_handles), fontsize=fontsize2)
     import matplotlib.lines as mlines
     # 第二部分图例 - 任务T=5和T=10
-    line1 = mlines.Line2D([], [], color='black', linestyle='-', label='T=10')
-    line2 = mlines.Line2D([], [], color='black', linestyle='--', label='T=5')
+    line1 = mlines.Line2D([], [], color='black', linestyle='--', label='5 Tasks')
+    line2 = mlines.Line2D([], [], color='black', linestyle='-', label='10 Tasks')
+
     legend2 = axs.legend(handles=[line1, line2], fontsize=fontsize2)
     # legend3 = axs[1].legend(handles=[line1, line2],  fontsize=fontsize2)
 

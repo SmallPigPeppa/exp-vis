@@ -65,8 +65,8 @@ for i, method in enumerate(methods):
     axs[i].plot(steps, ER[i], label='ER', color=colors[1], linestyle='-', marker='o', markersize=6)
     axs[i].plot(steps, DER[i], label='DER', color=colors[2], linestyle='-', marker='o', markersize=6)
     axs[i].plot(steps, LWF[i], label='LWF', color=colors[3], linestyle='-', marker='o', markersize=6)
-    axs[i].plot(steps, POD[i], label='POD', color=colors[4], linestyle='-', marker='o', markersize=6)
-    axs[i].plot(steps, Branch_tuning_KD[i], label='Branch-tuning+KD', color=colors[5], linestyle='-', marker='o',
+    axs[i].plot(steps, POD[i], label='PODnet', color=colors[4], linestyle='-', marker='o', markersize=6)
+    axs[i].plot(steps, Branch_tuning_KD[i], label='Our', color=colors[5], linestyle='-', marker='o',
                 markersize=6)
 
     axs[i].set_title(f"{method}", fontsize=fontsize2)
