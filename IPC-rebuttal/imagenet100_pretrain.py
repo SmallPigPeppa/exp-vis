@@ -11,20 +11,22 @@ icarl = [88.36, 62.6, 55.77, 51.65, 49.49, 47.82]
 lwf = [88.76, 46.4, 36.29, 32.12, 29.53, 28.44]
 ssre = [ 88.72, 80.93, 72.03, 68.95, 62.15, 60.98]
 pa2s = [89.24, 78.63, 71.74, 66.65, 63.08, 59.52]
+joint=[89.4, 87.17, 85.89, 85.03, 84.58, 83.14]
 
 
 # Plot the results
 fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(4/0.8*2, 4))
-l,=axs[0].plot([100], [85.8], label='JointCNN', marker='d', markersize=10, color='red')
-l0,=axs[0].plot(num_categories, ipc, label='IPC-BYOL', linestyle='--',    color='purple',markerfacecolor='none', markeredgewidth=1)
-l1,=axs[0].plot(num_categories, ssre, label='SSRE', linestyle='--',    color='darkblue',markerfacecolor='none', markeredgewidth=1)
-l2,=axs[0].plot(num_categories, pa2s, label='PASS', linestyle='--',    color='orange',markerfacecolor='none', markeredgewidth=1)
-l3,=axs[0].plot(num_categories, lwf, label='LwF', linestyle='--',    color='hotpink',markerfacecolor='none', markeredgewidth=1)
-l4,=axs[0].plot(num_categories, der, label='DER',   color='black')
-l5,=axs[0].plot(num_categories, podnet, label='PODNet',   color='gray')
-l6,=axs[0].plot(num_categories, ucir, label='UCIR',   color='yellowgreen')
-l7,=axs[0].plot(num_categories, coil, label='COIL',   color='firebrick')
-l8,=axs[0].plot(num_categories, icarl, label='iCaRL',   color='dodgerblue')
+l, = axs[0].plot(num_categories, joint, label='JointCNN', color='red')
+l0,=axs[0].plot(num_categories, ipc, label='Our', linestyle='--',    color='purple',markerfacecolor='none', markeredgewidth=1)
+l1,=axs[0].plot(num_categories, ssre, label='SSRE-BYOL', linestyle='--',    color='darkblue',markerfacecolor='none', markeredgewidth=1)
+l2,=axs[0].plot(num_categories, pa2s, label='PASS-BYOL', linestyle='--',    color='orange',markerfacecolor='none', markeredgewidth=1)
+l3,=axs[0].plot(num_categories, lwf, label='LwF-BYOL', linestyle='--',    color='hotpink',markerfacecolor='none', markeredgewidth=1)
+l4,=axs[0].plot(num_categories, der, label='DER-BYOL',   color='black')
+l5,=axs[0].plot(num_categories, podnet, label='PODNet-BYOL',   color='gray')
+l6,=axs[0].plot(num_categories, ucir, label='UCIR-BYOL',   color='yellowgreen')
+l7,=axs[0].plot(num_categories, coil, label='COIL-BYOL',   color='firebrick')
+l8,=axs[0].plot(num_categories, icarl, label='iCaRL-BYOL',   color='dodgerblue')
+
 
 
 
@@ -46,18 +48,21 @@ icarl = [88.36, 46.98, 46.4, 44.31, 42.4, 40.8, 39.58, 40.33, 40.18, 38.69, 38.6
 lwf = [88.76, 31.05, 25.67, 21.85, 20.29, 20.29, 19.6, 18.4, 17.16, 15.79, 14.18]
 ssre = [88.62, 79.66, 75.33, 67.02, 63.06, 57.66, 56.37, 55.67, 54.49, 51.23, 50.11]
 pa2s = [88.88, 77.05454545, 70.76666667, 63.07692308, 61.11428571, 58, 53.975, 53.50588235, 51.26666667, 48.82105263, 48.5]
+joint=[89.4, 88.24, 87.17, 86.06, 85.89, 85.39, 85.03, 84.56, 84.58, 83.89, 83.14]
 
-axs[1].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-axs[1].plot(num_categories, ipc, label='IPC-BYOL', linestyle='--',   color='purple',markerfacecolor='none', markeredgewidth=1)
-axs[1].plot(num_categories, ssre, label='SSRE', linestyle='--',   color='darkblue',markerfacecolor='none', markeredgewidth=1)
-axs[1].plot(num_categories, pa2s, label='PASS', linestyle='--',   color='orange',markerfacecolor='none', markeredgewidth=1)
-axs[1].plot(num_categories, lwf, label='LwF', linestyle='--',   color='hotpink',markerfacecolor='none', markeredgewidth=1)
 
-axs[1].plot(num_categories, der, label='DER',  color='black')
-axs[1].plot(num_categories, podnet, label='PODNet',  color='gray')
-axs[1].plot(num_categories, ucir, label='UCIR',  color='yellowgreen')
-axs[1].plot(num_categories, coil, label='COIL',  color='firebrick')
-axs[1].plot(num_categories, icarl, label='iCaRL',  color='dodgerblue')
+l, = axs[1].plot(num_categories, joint, label='JointCNN', color='red')
+axs[1].plot(num_categories, ipc, label='Our', linestyle='--',   color='purple',markerfacecolor='none', markeredgewidth=1)
+axs[1].plot(num_categories, ssre, label='SSRE-BYOL', linestyle='--',   color='darkblue',markerfacecolor='none', markeredgewidth=1)
+axs[1].plot(num_categories, pa2s, label='PASS-BYOL', linestyle='--',   color='orange',markerfacecolor='none', markeredgewidth=1)
+axs[1].plot(num_categories, lwf, label='LwF-BYOL', linestyle='--',   color='hotpink',markerfacecolor='none', markeredgewidth=1)
+
+axs[1].plot(num_categories, der, label='DER-BYOL',  color='black')
+axs[1].plot(num_categories, podnet, label='PODNet-BYOL',  color='gray')
+axs[1].plot(num_categories, ucir, label='UCIR-BYOL',  color='yellowgreen')
+axs[1].plot(num_categories, coil, label='COIL-BYOL',  color='firebrick')
+axs[1].plot(num_categories, icarl, label='iCaRL-BYOL',  color='dodgerblue')
+
 
 
 axs[1].set_xlabel('Number of Classes',fontsize=20)
@@ -77,6 +82,6 @@ legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5),
 legend.get_frame().set_facecolor('gray')
 legend.get_frame().set_alpha(0.1)
 plt.tight_layout()
-fig.savefig('s-imagenet100--pretrain-R10.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('s-imagenet100-pretrain-R10.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 
 plt.show()
