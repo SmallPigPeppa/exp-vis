@@ -11,11 +11,12 @@ icarl = [81.92, 59.12, 52.2, 46.79, 43.51, 42.59]
 lwf = [81.74, 56.02, 46.07, 33.7, 29.18, 26.6]
 ssre = [80.58, 66.73, 61.47, 57.1, 54.23, 52.56]
 pa2s = [81.02, 68.417, 65.514, 60.05, 57.16, 54.34]
+joint = [89.16, 87.73, 87.37, 85.09, 84.22, 83.26]
 
 # Plot the results
-fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(4/0.8*2, 4))
-l,=axs[0].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
-l0,=axs[0].plot(num_categories, ipc, label='IPC-BYOL', linestyle='--',    color='purple',markerfacecolor='none', markeredgewidth=1)
+fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(4 / 0.8 * 2, 4))
+l, = axs[0].plot(num_categories, joint, label='JointCNN', color='red')
+l0,=axs[0].plot(num_categories, ipc, label='Our', linestyle='--',    color='purple',markerfacecolor='none', markeredgewidth=1)
 l1,=axs[0].plot(num_categories, ssre, label='SSRE', linestyle='--',    color='darkblue',markerfacecolor='none', markeredgewidth=1)
 l2,=axs[0].plot(num_categories, pa2s, label='PASS', linestyle='--',    color='orange',markerfacecolor='none', markeredgewidth=1)
 l3,=axs[0].plot(num_categories, lwf, label='LwF', linestyle='--',    color='hotpink',markerfacecolor='none', markeredgewidth=1)
@@ -45,8 +46,9 @@ icarl = [81.92, 54.44, 51.12, 46.74, 45.59, 44.09, 41.19, 40.93, 41.04, 40.98, 4
 lwf = [81.74,51.07,39.67,33.02,27.39,23.17,19.55,19.4,19.39,18.2,17.01]
 ssre = [80.58, 69.09, 64.82, 61.48, 59.89, 58.13, 55.82, 52.93, 51.34, 49.27, 44.23]
 pa2s = [80.2, 71.89, 67.36, 64.13, 61.21, 58.98, 54.86, 51.58, 49.17, 47.1, 42.05]
+joint=[89.16, 88.16, 87.78, 87.15, 87.2, 86.25, 84.82, 84.39, 83.86, 83.66, 82.98]
 
-axs[1].plot([100], [82.7], label='JointCNN', marker='d', markersize=10, color='red')
+axs[1].plot(num_categories, joint, label='JointCNN', color='red')
 axs[1].plot(num_categories, ipc, label='IPC-BYOL', linestyle='--',   color='purple',markerfacecolor='none', markeredgewidth=1)
 axs[1].plot(num_categories, ssre, label='SSRE', linestyle='--',   color='darkblue',markerfacecolor='none', markeredgewidth=1)
 axs[1].plot(num_categories, pa2s, label='PASS', linestyle='--',   color='orange',markerfacecolor='none', markeredgewidth=1)
@@ -58,6 +60,8 @@ axs[1].plot(num_categories, ucir, label='UCIR',  color='yellowgreen')
 axs[1].plot(num_categories, coil, label='COIL',  color='firebrick')
 axs[1].plot(num_categories, icarl, label='iCaRL',  color='dodgerblue')
 
+minor_ticks = [55, 65, 75, 85, 95]  # 这些是10步中的额外刻度
+axs[1].set_xticks(minor_ticks, minor=True)
 
 axs[1].set_xlabel('Number of Classes',fontsize=20)
 axs[1].set_ylabel('Top-1 Accuracy',fontsize=20)
@@ -79,7 +83,7 @@ legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5),
 legend.get_frame().set_facecolor('gray')
 legend.get_frame().set_alpha(0.1)
 plt.tight_layout()
-fig.savefig('cifar100-R10.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('s-cifar100-R10.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 # fig.savefig('cifar100-all-pretrain-new.pdf')
 
 plt.show()
