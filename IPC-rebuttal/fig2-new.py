@@ -5,7 +5,7 @@ import re
 
 if __name__ == '__main__':
     # 加载配置文件
-    config_file = 'fig2.json'
+    config_file = 'fig2-new.json'
     with open(os.path.join('experiments', config_file), 'r') as file:
         config = json.load(file)
 
@@ -27,14 +27,14 @@ if __name__ == '__main__':
             data = config["datasets"][dataset_i][method]
             if dataset_i == '5-tasks':
                 num_categories = [50, 60, 70, 80, 90, 100]
-                ax.plot(num_categories, data, label=method, color="#1f77b4", linestyle=settings["linestyle"])
+                ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
             elif dataset_i == '10-tasks':
                 num_categories = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
-                ax.plot(num_categories, data, label=method, color="#ff7f0e", linestyle=settings["linestyle"])
+                ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
 
         ax.set_xlabel('number of Classes', fontsize=fontsize0)
-        # ax.set_ylabel('accuracy(%)', fontsize=fontsize0)
-        ax.set_ylabel(dataset_i, fontsize=fontsize0)
+        ax.set_ylabel('Accuracy(%)', fontsize=fontsize0)
+        # ax.set_ylabel(dataset_i, fontsize=fontsize0)
         # ax.set_title(f'{dataset_i}', fontsize=fontsize0, loc="left")
         # ax.set_title(f'T={num_tasks}', fontsize=fontsize0, loc="right")
         # ax.set_title(f'{num_tasks} Tasks', fontsize=fontsize0, loc="right")
@@ -42,7 +42,7 @@ if __name__ == '__main__':
         ax.tick_params(labelsize=fontsize1)
         minor_ticks = [55, 65, 75, 85, 95]  # 这些是10步中的额外刻度
         ax.set_xticks(minor_ticks, minor=True)
-        legend = ax.legend(fontsize=fontsize2)
+        # legend = ax.legend(fontsize=fontsize2)
         # legend.get_frame().set_facecolor('gray')
         # legend.get_frame().set_alpha(0.1)
 
@@ -52,17 +52,14 @@ if __name__ == '__main__':
     fig.subplots_adjust(wspace=spacing)
 
     plot_dataset(axs, "5-tasks", [50, 60, 70, 80, 90, 100])
-    plot_dataset(axs, "10-tasks", [50, 60, 70, 80, 90, 100])
-    # plot_dataset(axs[1], "Accuracy", [50, 60, 70, 80, 90, 100])
 
-    # handles, labels = axs[0].get_legend_handles_labels()
-    # legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=fontsize2)
-    # legend = fig.legend(handles, labels,fontsize=fontsize2)
-
-    # legend.get_frame().set_facecolor('gray')
-    # legend.get_frame().set_alpha(0.1)
-
-    plt.tight_layout()
-    # fig.savefig(f'fig1.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
-    fig.savefig(f'fig2.pdf')
+    handles, labels = axs.get_legend_handles_labels()
+    legend = fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(0.9, 0.88), fontsize=fontsize2)
+    # legend = fig.legend(handles, labels, fontsize=fontsize2)
+    legend.get_frame().set_facecolor('gray')
+    legend.get_frame().set_alpha(0.1)
+    #
+    # plt.tight_layout()
+    fig.savefig(f'fig2.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+    # fig.savefig(f'fig2.pdf')
     plt.show()
