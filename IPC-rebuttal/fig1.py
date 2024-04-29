@@ -26,21 +26,17 @@ if __name__ == '__main__':
         for method, settings in methods.items():
             data = config["datasets"][dataset_i][method]
             if method == '5-tasks':
-                num_categories = [50, 60, 70, 80, 90, 100]
+                num_categories = [20, 40, 60, 80, 100]
                 ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
             elif method == '10-tasks':
-                num_categories = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+                num_categories = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
                 ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
 
         ax.set_xlabel('number of Classes', fontsize=fontsize0)
-        # ax.set_ylabel('accuracy(%)', fontsize=fontsize0)
         ax.set_ylabel(dataset_i, fontsize=fontsize0)
-        # ax.set_title(f'{dataset_i}', fontsize=fontsize0, loc="left")
-        # ax.set_title(f'T={num_tasks}', fontsize=fontsize0, loc="right")
-        # ax.set_title(f'{num_tasks} Tasks', fontsize=fontsize0, loc="right")
         ax.grid(True)
         ax.tick_params(labelsize=fontsize1)
-        minor_ticks = [55, 65, 75, 85, 95]  # 这些是10步中的额外刻度
+        minor_ticks = [10, 30, 50, 70, 90]  # 这些是10步中的额外刻度
         ax.set_xticks(minor_ticks, minor=True)
         legend = ax.legend(fontsize=fontsize2)
         # legend.get_frame().set_facecolor('gray')
@@ -52,16 +48,10 @@ if __name__ == '__main__':
     fig.subplots_adjust(wspace=spacing)
 
     plot_dataset(axs[0], "Distance", [50, 60, 70, 80, 90, 100])
-    plot_dataset(axs[1], "Accuracy", [50, 60, 70, 80, 90, 100])
+    plot_dataset(axs[1], "Task0 Acc", [50, 60, 70, 80, 90, 100])
 
     handles, labels = axs[0].get_legend_handles_labels()
-    # legend = fig.legend(handles, labels, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=fontsize2)
-    # legend = fig.legend(handles, labels,fontsize=fontsize2)
-
-    # legend.get_frame().set_facecolor('gray')
-    # legend.get_frame().set_alpha(0.1)
 
     plt.tight_layout()
-    # fig.savefig(f'fig1.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
     fig.savefig(f'fig1.pdf')
     plt.show()

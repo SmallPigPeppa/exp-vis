@@ -1,0 +1,26 @@
+{
+    "datasets": {
+        "5-tasks": {
+        "CIL": [91.40, 74.28, 62.68, 53.38, 46.84],
+        "TIL": [91.40, 88.40, 87.40, 86.40, 86.40],
+        "CJT": [91.40, 78.89, 73.04, 70.93, 65.69],
+        "Joint": [91.40, 88.47, 85.12, 82.61, 80.89]
+        }
+    },
+    "plot_settings": {
+        "num_tasks": 5,
+        "fontsize0": 16,
+        "fontsize1": 12,
+        "fontsize2": 12,
+        "spacing": 15,
+        "figuresize": [5, 4],
+        "methods": {
+            "Joint": {"color": "red", "linestyle": "-"},
+            "CIL": {"color": "#1f77b4", "linestyle": "-"},
+            "TIL": {"color": "#ff7f0e", "linestyle": "-"},
+            "CJT": {"color": "#2ca02c", "linestyle": "-"}
+
+        }
+    }
+}
+
