@@ -5,7 +5,7 @@ import os
 if __name__ == '__main__':
     # 加载配置文件
     config_file = 'new_old.json'
-    config_file = 'new_old_fetril2.json'
+    config_file = 'new_old.json'
     with open(os.path.join('experiments', config_file), 'r') as file:
         config = json.load(file)
 

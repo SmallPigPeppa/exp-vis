@@ -81,10 +81,10 @@ axs[1].grid(True)
 
 
 
-# legend = plt.figlegend(handles=[l0, l1, l2, l3, l4, l5, l6, l7], loc='upper center', bbox_to_anchor=(0.5, 1.3), ncol=4,
-#                        columnspacing=1.0, fontsize=12)
+legend = plt.figlegend(handles=[l0, l1, l2, l3, l4, l5, l6, l7], loc='upper center', bbox_to_anchor=(0.5, 1.3), ncol=4,
+                       columnspacing=1.0, fontsize=12)
 plt.tight_layout()
-fig.savefig('cifar100-abalation-classifier.pdf')
-# fig.savefig('cifar100-abalation-classifier.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+# fig.savefig('cifar100-abalation-classifier.pdf')
+fig.savefig('cifar100-abalation-classifier.pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 
 plt.show()

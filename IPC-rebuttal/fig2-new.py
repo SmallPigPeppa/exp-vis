@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 ax.plot(num_categories, data, label=method, color=settings["color"], linestyle=settings["linestyle"])
 
         ax.set_xlabel('number of Classes', fontsize=fontsize0)
-        ax.set_ylabel('Task Acc', fontsize=fontsize0)
+        ax.set_ylabel('Accuracy', fontsize=fontsize0)
         ax.grid(True)
         ax.tick_params(labelsize=fontsize1)
         minor_ticks = [30, 50, 70, 90]  # 这些是10步中的额外刻度

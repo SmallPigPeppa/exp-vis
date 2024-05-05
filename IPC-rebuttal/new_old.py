@@ -4,7 +4,7 @@ import os
 
 if __name__ == '__main__':
     # 加载配置文件
-    config_file = 'new_old_fetril2.json'
+    config_file = 'new_old.json'
     with open(os.path.join('experiments', config_file), 'r') as file:
         config = json.load(file)
 
@@ -23,9 +23,9 @@ if __name__ == '__main__':
     for i, (method, data) in enumerate(methods_data.items()):
         ax = axs[i // 2, i % 2]
         x_data = list(range(1, len(data["Base"]) + 1))
-        ax.plot(x_data, data["Base"], label='Base', linestyle='-', marker='o', color='blue', markersize=8,
+        ax.plot(x_data, data["Base"], label='Old', linestyle='-', marker='o', color='blue', markersize=8,
                 markerfacecolor='none', markeredgewidth=1.5, markeredgecolor='blue')
-        ax.plot(x_data, data["Novel"], label='Novel', linestyle='-', marker='o', color='orange', markersize=8,
+        ax.plot(x_data, data["Novel"], label='New', linestyle='-', marker='o', color='orange', markersize=8,
                 markerfacecolor='none', markeredgewidth=1.5, markeredgecolor='orange')
 
         ax.set_xlabel('Tasks', fontsize=fontsize0)
@@ -39,8 +39,8 @@ if __name__ == '__main__':
         ax.set_yticks([0, 20, 40, 60, 80, 100])
         # minor_ticks = [0, 100]
         # ax.set_yticks(minor_ticks, minor=True)
-        ax.set_xticks([1, 3, 5, 7, 9])
-        minor_ticks = [2, 4, 6, 8]
+        ax.set_xticks([1, 3, 5, 7, 9, 11])
+        minor_ticks = [2, 4, 6, 8, 10]
         ax.set_xticks(minor_ticks, minor=True)
 
     # 设置图例

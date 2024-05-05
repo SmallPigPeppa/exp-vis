@@ -2,7 +2,7 @@
     "datasets": {
         "5-tasks": {
         "CIL": [91.40, 74.28, 62.68, 53.38, 46.84],
-        "TIL": [91.40, 88.40, 87.40, 86.40, 86.40],
+        "TIL": [91.40, 88.05, 87.25, 86.36, 85.55],
         "CJT": [91.40, 78.89, 73.04, 70.93, 65.69],
         "Joint": [91.40, 88.47, 85.12, 82.61, 80.89]
         }
@@ -15,11 +15,10 @@
         "spacing": 15,
         "figuresize": [5, 4],
         "methods": {
-            "Joint": {"color": "red", "linestyle": "-"},
             "CIL": {"color": "#1f77b4", "linestyle": "-"},
             "TIL": {"color": "#ff7f0e", "linestyle": "-"},
-            "CJT": {"color": "#2ca02c", "linestyle": "-"}
-
+            "CJT": {"color": "#2ca02c", "linestyle": "-"},
+            "Joint": {"color": "red", "linestyle": "-"}
         }
     }
 }
