@@ -6,7 +6,7 @@
 
 
 
-python save_feats_cifar100.py --method_name byol-bt-task4 --ckpt_path ckpt/byol-bt-task4.ckpt
-python save_feats_cifar100.py --method_name byol-bt-task0 --ckpt_path ckpt/byol-bt-task0.ckpt
-python save_feats_cifar100.py --method_name byol-ft-task4 --ckpt_path ckpt/byol-ft-task4.ckpt
+python save_feats_cifar100_branchtuning.py --method_name byol-bt-task4 --ckpt_path ckpt/byol-bt-task4.ckpt
+python save_feats_cifar100_branchtuning.py --method_name byol-bt-task0 --ckpt_path ckpt/byol-bt-task0.ckpt
+python save_feats_cifar100_branchtuning.py --method_name byol-ft-task4 --ckpt_path ckpt/byol-ft-task4.ckpt
 

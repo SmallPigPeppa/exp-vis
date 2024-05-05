@@ -11,9 +11,9 @@ import argparse
 def laod_args():
     parser = argparse.ArgumentParser(description='Extract features and labels from a pretrained model')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size (default: 32)')
-    parser.add_argument('--ckpt_path', type=str, default='ckpt/byol-cifar10-32brzx9a-ep=999.ckpt', help='')
+    parser.add_argument('--ckpt_path', type=str, default='ckpt/byol-bt-task4.ckpt', help='')
     parser.add_argument('--data_dir', type=str, default='./data', help='')
-    parser.add_argument('--method_name', type=str, default='byol', help='')
+    parser.add_argument('--method_name', type=str, default='byol-bt-task4', help='')
     parser.add_argument('--save_dir', type=str, default='Pre-Feats-cifar100', help='')
     args = parser.parse_args()
     return args
