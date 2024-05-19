@@ -44,7 +44,7 @@ ax.tick_params(axis='both', which='major', labelsize=tick_label_fontsize, width=
 
 # 设置y轴
 ax.set_ylabel('ImageNet-1K Acc@1', fontsize=title_fontsize)
-ax.set_xlabel('Resolution', fontsize=title_fontsize)
+ax.set_xlabel(f'Resolution $r_i$', fontsize=title_fontsize)
 ax.set_title('Impact of Model Size', fontsize=title_fontsize)
 
 # 设置y轴范围
@@ -67,8 +67,8 @@ ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.75)
 ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.5)
 
 # 设置y轴主刻度和副刻度
-ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
-ax.yaxis.set_minor_locator(mticker.MultipleLocator(5))
+ax.yaxis.set_major_locator(mticker.MultipleLocator(20))
+ax.yaxis.set_minor_locator(mticker.MultipleLocator(10))
 
 # 调整布局
 plt.tight_layout()
