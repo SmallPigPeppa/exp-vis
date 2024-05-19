@@ -6,7 +6,7 @@ def custom_formatter(x, pos):
     return f'{int(x)}%'
 
 # 数据
-resolutions = ['56x56', '112x112', '224x224']
+resolutions = ['56', '112', '224']
 vit_s = [77.944, 83.746, 85.0]
 vit_b = [45.68, 80.12, 81.0]
 vit_l = [36.0, 79.0, 80.0]
@@ -33,9 +33,9 @@ ax.set_xticks([x_pos + (width + spacing) for x_pos in x])  # Center ticks betwee
 ax.set_xticklabels(resolutions)
 
 # 设置字体大小
-title_fontsize = 26
-tick_label_fontsize = 23
-legend_fontsize = 21
+title_fontsize = 32
+tick_label_fontsize = 30
+legend_fontsize = 30
 line_width = 4  # Adjust line width
 minor_tick_length = 10
 

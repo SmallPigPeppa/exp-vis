@@ -6,7 +6,7 @@ def custom_formatter(x, pos):
     return f'{int(x)}%'
 
 # 数据
-resolutions = ['56x56', '112x112', '224x224']
+resolutions = ['56', '112', '224']
 epoch_1 = [67.61000156, 82.91800022, 85.1]
 epoch_3 = [77.95799971, 83.74400139, 85.1]
 epoch_5 = [77.95799971, 83.74400139, 85.1]
@@ -34,9 +34,9 @@ ax.set_xticks([x_pos + (width + spacing) for x_pos in x])  # Center ticks betwee
 ax.set_xticklabels(resolutions)
 
 # 设置字体大小
-title_fontsize = 26
-tick_label_fontsize = 23
-legend_fontsize = 21
+title_fontsize = 32
+tick_label_fontsize = 30
+legend_fontsize = 30
 line_width = 4  # Adjust line width
 minor_tick_length = 10
 
@@ -45,7 +45,7 @@ ax.tick_params(axis='both', which='major', labelsize=tick_label_fontsize, width=
 
 # 设置y轴
 ax.set_ylabel('ImageNet-1K Acc@1', fontsize=title_fontsize)
-ax.set_xlabel('Resolution', fontsize=title_fontsize)
+ax.set_xlabel(f'Resolution $r_i$', fontsize=title_fontsize)
 ax.set_title('Impact of Training Epochs', fontsize=title_fontsize)
 
 # 设置y轴范围
@@ -68,8 +68,8 @@ ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.75)
 ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.5)
 
 # 设置y轴主刻度和副刻度
-ax.yaxis.set_major_locator(mticker.MultipleLocator(5))
-ax.yaxis.set_minor_locator(mticker.MultipleLocator(2.5))
+ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
+ax.yaxis.set_minor_locator(mticker.MultipleLocator(5))
 
 # 调整布局
 plt.tight_layout()
