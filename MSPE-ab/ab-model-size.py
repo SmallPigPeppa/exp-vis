@@ -7,13 +7,13 @@ def custom_formatter(x, pos):
 
 # 数据
 resolutions = ['56', '112', '224']
-vit_s = [77.944, 83.746, 85.0]
-vit_b = [45.68, 80.12, 81.0]
-vit_l = [36.0, 79.0, 80.0]
+vit_s = [65.90800285,	78.81399989	,83.036]
+vit_b = [75.37, 	83.49, 	85.66 ]
+vit_l = [78.25,	84.98,	86.942]
 
 # 数据组织，按模型大小
-data = [vit_s, vit_b, vit_l]
-labels = ['ViT-S', 'ViT-B', 'ViT-L']
+data = [vit_l, vit_b, vit_s]
+labels = ['DeiT3-L', 'DeiT3-B', 'DeiT3-S']
 colors = ['#C76426', '#8F7E1E', '#469B76']
 
 # 创建图表

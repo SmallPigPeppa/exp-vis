@@ -7,9 +7,9 @@ def custom_formatter(x, pos):
 
 # 数据
 resolutions = ['56', '112', '224']
-K_2 = [77.944, 83.746, 85.0]
-K_3 = [45.68, 80.12, 81.0]
-K_4 = [36.0, 79.0, 80.0]
+K_2 = [68.54,81.37,85.1]
+K_3 = [75.81938,82.96400139,85.1]
+K_4 = [77.95799971,83.74400139,85.1]
 
 # 数据组织，按分辨率
 data = [K_2, K_3, K_4]
@@ -69,8 +69,10 @@ ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.75)
 ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.5)
 
 # 设置y轴主刻度和副刻度
-ax.yaxis.set_major_locator(mticker.MultipleLocator(20))
-ax.yaxis.set_minor_locator(mticker.MultipleLocator(10))
+ax.yaxis.set_major_locator(mticker.MultipleLocator(10))
+ax.yaxis.set_minor_locator(mticker.MultipleLocator(5))
+# 设置y轴范围
+ax.set_ylim(60, 86)
 
 # 调整布局
 plt.tight_layout()
