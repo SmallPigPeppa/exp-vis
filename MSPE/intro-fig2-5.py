@@ -27,9 +27,12 @@ mspe_accuracy = [67.99, 75.17, 79.53, 81.65, 82.65, 83.13, 83.75, 83.71, 83.92, 
 fig, ax = plt.subplots(figsize=(6 / 0.7, 6))
 
 # Plotting accuracies
-ax.plot(resolution_labels, vanilla_accuracy, label='Vanilla', linestyle='--', linewidth=l1, marker='o', markersize=marker_size)
-ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--', linewidth=l1, marker='s',
+ax.plot(resolution_labels, vanilla_accuracy, label='Vanilla', linestyle='--', linewidth=l1, marker='*', markersize=marker_size)
+ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--', linewidth=l1, marker='^',
         markersize=marker_size)
+# ax.plot(resolution_labels, vanilla_accuracy, label='Vanilla', linestyle='--', linewidth=l1, marker='o', markersize=marker_size)
+# ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--', linewidth=l1, marker='s',
+#         markersize=marker_size)
 ax.plot(resolution_labels, mspe_accuracy, marker=None, label='MSPE', linewidth=l1, color='r')
 
 # Set titles and labels

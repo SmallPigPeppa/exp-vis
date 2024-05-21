@@ -24,8 +24,12 @@ mspe_accuracy = [56.41, 71.02, 77.94, 79.54, 81.63, 82.51, 83.75, 83.81, 83.94, 
 fig, ax = plt.subplots(figsize=(6 / 0.7, 6))
 
 # 绘制不同方法的准确率曲线
-ax.plot(resolution_labels, vanilla_accuracy,  label='Vanilla',linewidth=l1, linestyle='--', marker='o', markersize=marker_size)
-ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--',linewidth=l1, marker='s', markersize=marker_size)
+ax.plot(resolution_labels, vanilla_accuracy, label='Vanilla', linestyle='--', linewidth=l1, marker='*', markersize=marker_size)
+ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--', linewidth=l1, marker='^',
+        markersize=marker_size)
+# ax.plot(resolution_labels, vanilla_accuracy,  label='Vanilla',linewidth=l1, linestyle='--', marker='*', markersize=marker_size)
+# ax.plot(resolution_labels, flexivit_accuracy, label='FlexiViT', linestyle='--',linewidth=l1, marker='*', markersize=marker_size)
+
 ax.plot(resolution_labels, mspe_accuracy, marker=None, label='MSPE',linewidth=l1,color='r')
 # ax.plot(resolution_labels, mspe_accuracy, marker=None, label='MSPE',linewidth=l1,color='#2ca02c')
 
