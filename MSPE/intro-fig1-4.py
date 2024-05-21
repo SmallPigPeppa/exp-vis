@@ -4,14 +4,13 @@ from matplotlib.ticker import MultipleLocator, FuncFormatter
 def custom_formatter(x, pos):
     return f'{int(x)}%'
 
-title_fontsize = 26
-tick_label_fontsize = 23
-legend_fontsize = 21
-line_width = 2  # Adjust line width
-minor_tick_length = 6
-l1=2
-marker_size = 8
-
+title_fontsize = 33
+tick_label_fontsize = 26
+legend_fontsize = 28
+line_width = 3  # Adjust line width
+minor_tick_length = 8
+l1 = 1.5
+marker_size = 7
 # 分辨率
 resolutions = [28, 42, 56, 70, 84, 98, 112, 126, 140, 168, 224, 448, 896]
 resolution_labels = [str(res) for res in resolutions]
@@ -33,7 +32,7 @@ ax.plot(resolution_labels, mspe_accuracy, marker=None, label='MSPE',linewidth=l1
 # 设置图形标题和轴标签
 ax.set_xlabel(f'test width $w_i$', fontsize=title_fontsize)
 ax.set_ylabel('ImageNet-1K Acc@1', fontsize=title_fontsize)
-ax.set_title(f'(b) $height=width$', fontsize=title_fontsize)
+ax.set_title(f'(a) $height=width$', fontsize=title_fontsize)
 
 # 设置x轴标签每隔一个res显示一个
 ax.set_xticks(resolution_labels[::2])
@@ -48,15 +47,15 @@ ax.spines['right'].set_visible(False)
 ax.spines['bottom'].set_linewidth(line_width)
 ax.spines['left'].set_linewidth(line_width)
 ax.tick_params(axis='both', labelsize=tick_label_fontsize)
-ax.tick_params(axis='x', which='minor', length=minor_tick_length)
+ax.tick_params(axis='x', which='minor', width=line_width, length=minor_tick_length)
 ax.tick_params(axis='both', which='major', width=line_width, length=minor_tick_length)
 
 # 添加图例
 ax.legend(fontsize=legend_fontsize)
 
 # 显示网格
-ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.75)
-ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.5)
+ax.grid(True, which='major', axis='y', linestyle='-', linewidth=1.0)
+ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.7)
 
 # 设置y轴的major和minor ticks
 ax.yaxis.set_major_locator(MultipleLocator(20))

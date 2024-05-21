@@ -6,13 +6,13 @@ def custom_formatter(x, pos):
     return f'{int(x)}%'
 
 
-title_fontsize = 26
-tick_label_fontsize = 23
-legend_fontsize = 21
-line_width = 2  # Adjust line width
-minor_tick_length = 6
-l1 = 2
-marker_size = 8
+title_fontsize = 33
+tick_label_fontsize = 26
+legend_fontsize = 28
+line_width = 3  # Adjust line width
+minor_tick_length = 8
+l1 = 1.5
+marker_size = 7
 
 # Resolutions
 resolutions = [x * 14 for x in [2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24, 32, 64]]
@@ -53,15 +53,15 @@ ax.spines['right'].set_visible(False)
 ax.spines['bottom'].set_linewidth(line_width)
 ax.spines['left'].set_linewidth(line_width)
 ax.tick_params(axis='both', labelsize=tick_label_fontsize)
-ax.tick_params(axis='x', which='minor', length=minor_tick_length)
+ax.tick_params(axis='x', which='minor', width=line_width, length=minor_tick_length)
 ax.tick_params(axis='both', which='major', width=line_width, length=minor_tick_length)
 
 # Add legend
 ax.legend(fontsize=legend_fontsize)
 
 # Display grid
-ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.75)
-ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.5)
+ax.grid(True, which='major', axis='y', linestyle='-', linewidth=1.0)
+ax.grid(True, which='minor', axis='y', linestyle='--', linewidth=0.7)
 
 # Set y-axis ticks
 ax.yaxis.set_major_locator(MultipleLocator(10))
