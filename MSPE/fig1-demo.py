@@ -21,11 +21,7 @@ axis_label_fontsize = 28
 tick_label_fontsize = 26
 legend_fontsize = 24
 
-
-
 # 数据集合
-
-
 datasets = [
     (vanilla_df, '#1f77b4', 'Vanilla'),
     (flexivit_df, '#ff7f0e', 'FlexiViT'),
@@ -35,8 +31,6 @@ datasets = [
 # 计算全局最小值和最大值
 data_min = min(df['Sim Classes'].min() for df, _, _ in datasets)
 data_max = max(df['Sim Classes'].max() for df, _, _ in datasets)
-# data_max = 0.95
-# data_min = 0.45
 
 # 定义bins
 num_bins = 30
@@ -45,38 +39,34 @@ base_bins = np.arange(data_min, data_max + bin_width, bin_width)
 
 # 绘制直方图和高斯曲线
 for i, (df, color, label) in enumerate(datasets):
-    # 计算每个数据集特定的bins偏移，以创建空隙
-    offset = (i - 1) * bin_width / 4  # 调整偏移量
-    bins = base_bins + offset
+    pass
 
-    # 绘制直方图
-    ax.hist(df['Sim Classes'], bins=bins, alpha=0.4, color=color, label=f'{label}', density=True, rwidth=0.8)
+# 设置轴线和标签颜色
+# ax.spines['bottom'].set_color('white')
+# ax.spines['left'].set_color('white')
+# ax.spines['top'].set_color('white')
+# ax.spines['right'].set_color('white')
+ax.xaxis.label.set_color('white')
+ax.yaxis.label.set_color('white')
+ax.tick_params(axis='x', colors='white')
+ax.tick_params(axis='y', colors='white')
 
-    # 高斯分布曲线的参数
-    mean_val = df['Sim Classes'].mean()
-    std_val = df['Sim Classes'].std()
-    x = np.linspace(data_min, data_max, 1000)
-    gaussian_curve = norm.pdf(x, mean_val, std_val)
-
-    # 绘制高斯分布曲线
-    ax.plot(x, gaussian_curve, color=color, linestyle='-', label=None,linewidth=3)
-    # ax.plot(x, gaussian_curve, color=color, linestyle='-', label=f'{label} Gaussian Fit')
-
-# 图例和标签
+# 取消刻度线，只显示边框
+ax.tick_params(axis='both', length=0)
 
 # Adjust font size for title, labels, and ticks
-ax.set_title('(c) Class Token', fontsize=title_fontsize)
-ax.set_xlabel('Cosine Similarity', fontsize=axis_label_fontsize)
-ax.set_ylabel('Density', fontsize=axis_label_fontsize)
+ax.set_title('(a) Illustration of Motivation', fontsize=title_fontsize)
+ax.set_xlabel('Cosine Similarity', fontsize=axis_label_fontsize, color='white')
+ax.set_ylabel('Density', fontsize=axis_label_fontsize, color='white')
 
 # Adjust tick label size
 ax.tick_params(axis='both', labelsize=tick_label_fontsize)
 
 # Adjust legend font size
-ax.legend(fontsize=legend_fontsize)
-ax.grid(True)
+# ax.legend(fontsize=legend_fontsize)
+# ax.grid(True)
 
 plt.tight_layout()
 plt.show()
 
-fig.savefig('fig1-class-token.pdf')
+fig.savefig('fig1-demo.pdf')

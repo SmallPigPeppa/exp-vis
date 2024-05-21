@@ -7,20 +7,15 @@ def custom_formatter(x, pos):
 
 # 数据
 resolutions = ['56', '112', '224']
-K_2 = [77.944, 83.746, 85.0]
-K_3 = [45.68, 80.12, 81.0]
-K_4 = [36.0, 79.0, 80.0]
+lambda_0 = [77.94399858, 83.74599814, 85.0]
+lambda_1 = [45.68, 80.12, 81.0]
+lambda_2 = [36.0, 79.0, 80.0]
 
-# "MEMO": {"color": "#1f77b4", "linestyle": "-"},
-# "FOSTER": {"color": "#ff7f0e", "linestyle": "-"},
-# "DER": {"color": "#2ca02c", "linestyle": "-"},
-# "PODNet": {"color": "#1f77b4", "linestyle": "-"},
-# "UCIR": {"color": "#9467bd", "linestyle": "-"},
-# "ICARL": {"color": "#8c564b", "linestyle": "-"},
 # 数据组织，按分辨率
-data = [K_2, K_3, K_4]
-labels = [r'$K=2$', r'$K=3$', r'$K=4$']
-colors = ['#1f77b4','#ff7f0e', '#9467bd', ]
+data = [lambda_0, lambda_1, lambda_2]
+labels = [r'$\lambda=0$', r'$\lambda=1$', r'$\lambda=2$']
+base_color = '#5975A4'  # 基础颜色
+alphas = [0.2, 0.4, 0.7]  # 不同透明度
 hatches = ['/', 'o', '*']  # 斜线, 星星, 圆点
 
 # 创建图表
@@ -33,7 +28,7 @@ spacing = 0.05  # 间距
 
 # 绘制柱状图
 for i in range(len(data)):
-    ax.bar([x_pos + (width + spacing) * i for x_pos in x], data[i], width=width, color=colors[i], label=labels[i], alpha=0.6, hatch=hatches[i])
+    ax.bar([x_pos + (width + spacing) * i for x_pos in x], data[i], width=width, color=base_color, label=labels[i], alpha=alphas[i],hatch=hatches[i])
 
 # 设置x轴
 ax.set_xticks([x_pos + (width + spacing) for x_pos in x])  # Center ticks between the bars
@@ -52,7 +47,7 @@ ax.tick_params(axis='both', which='major', labelsize=tick_label_fontsize, width=
 # 设置y轴
 ax.set_ylabel('ImageNet-1K Acc@1', fontsize=title_fontsize)
 ax.set_xlabel(f'Resolution $r_i$', fontsize=title_fontsize)
-ax.set_title(r'Impact of $\mathbf{K}$', fontsize=title_fontsize)
+ax.set_title(r'Impact of $\mathbf{\lambda}$', fontsize=title_fontsize)
 
 # 设置y轴范围
 ax.set_ylim(30, 90)
@@ -84,4 +79,4 @@ plt.tight_layout()
 plt.show()
 
 # 保存图表
-fig.savefig('ab-K.pdf')
+fig.savefig('ab-lambda.pdf')
